@@ -1,5 +1,39 @@
 #include <stdio.h>
 
+void exibirMenuMassa() {
+    printf("\nEscolha a unidade de entrada:\n");
+    printf("1 - Quilograma (kg)\n");
+    printf("2 - Grama (g)\n");
+    printf("3 - Tonelada (t)\n");
+    printf("Digite sua escolha: ");
+}
+
+void converterUnidadeMassa(int unidadeOrigem, double valor) {
+    double quilogramas, gramas, toneladas;
+
+    // Conversão para quilogramas
+    if (unidadeOrigem == 1) {
+        quilogramas = valor;
+    } else if (unidadeOrigem == 2) {
+        quilogramas = valor / 1000.0; // g para kg
+    } else if (unidadeOrigem == 3) {
+        quilogramas = valor * 1000.0; // t para kg
+    } else {
+        printf("Unidade inválida!\n");
+        return;
+    }
+
+    // Conversões a partir de quilogramas
+    gramas = quilogramas * 1000.0;
+    toneladas = quilogramas / 1000.0;
+
+    // Exibir resultados
+    printf("\nResultados:\n");
+    printf("Quilogramas: %.4f kg\n", quilogramas);
+    printf("Gramas: %.2f g\n", gramas);
+    printf("Toneladas: %.6f t\n", toneladas);
+}
+
 void exibirMenu() {
     printf("\nEscolha a unidade de entrada:\n");
     printf("1 - Metro (m)\n");
