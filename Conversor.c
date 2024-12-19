@@ -34,7 +34,7 @@ void converterUnidadeMassa(int unidadeOrigem, double valor) {
     printf("Toneladas: %.6f t\n", toneladas);
 }
 
-void exibirMenu() {
+void exibirMenuMetro() {
     printf("\nEscolha a unidade de entrada:\n");
     printf("1 - Metro (m)\n");
     printf("2 - Centímetro (cm)\n");
@@ -69,11 +69,13 @@ void converterUnidade(int unidadeOrigem, double valor) {
 }
 
 int main() {
-    int unidadeOrigem;
+    int unidadeOrigem, tipoConversao;
     double valor;
 
     printf("Conversor de Unidades de Comprimento\n");
-    exibirMenu();
+    printf("Qual conversor deseja trabalhar? ");
+    
+    exibirMenuMetro();
     scanf("%d", &unidadeOrigem);
 
     printf("Digite o valor a ser convertido: ");
