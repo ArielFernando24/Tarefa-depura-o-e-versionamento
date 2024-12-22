@@ -2,7 +2,44 @@
 #include <string.h>
 #include <ctype.h>
 
-void exibirMenu() {
+// Função para exibir o menu de conversão de massa
+void exibirMenuMassa() {
+    printf("\nEscolha a unidade de entrada:\n");
+    printf("1 - Quilograma (kg)\n");
+    printf("2 - Grama (g)\n");
+    printf("3 - Tonelada (t)\n");
+    printf("Digite sua escolha: ");
+}
+
+// Função para converter unidades de massa
+void converterUnidadeMassa(int unidadeOrigem, double valor) {
+    double quilogramas, gramas, toneladas;
+
+    // Conversão para quilogramas
+    if (unidadeOrigem == 1) {
+        quilogramas = valor;
+    } else if (unidadeOrigem == 2) {
+        quilogramas = valor / 1000.0; // g para kg
+    } else if (unidadeOrigem == 3) {
+        quilogramas = valor * 1000.0; // t para kg
+    } else {
+        printf("Unidade inválida!\n");
+        return;
+    }
+
+    // Conversões a partir de quilogramas
+    gramas = quilogramas * 1000.0;
+    toneladas = quilogramas / 1000.0;
+
+    // Exibir resultados
+    printf("\nResultados:\n");
+    printf("Quilogramas: %.4f kg\n", quilogramas);
+    printf("Gramas: %.2f g\n", gramas);
+    printf("Toneladas: %.6f t\n", toneladas);
+}
+
+// Função para exibir o menu de conversão de comprimento
+void exibirMenuComprimento() {
     printf("\nEscolha a unidade de entrada:\n");
     printf("1 - Metro (m)\n");
     printf("2 - Centímetro (cm)\n");
@@ -10,7 +47,8 @@ void exibirMenu() {
     printf("Digite sua escolha: ");
 }
 
-void converterUnidade(int unidadeOrigem, double valor) {
+// Função para converter unidades de comprimento
+void converterUnidadeComprimento(int unidadeOrigem, double valor) {
     double metros, centimetros, milimetros;
 
     // Conversão para metros
@@ -36,83 +74,144 @@ void converterUnidade(int unidadeOrigem, double valor) {
     printf("Milímetros: %.2f mm\n", milimetros);
 }
 
-// CONVERSOR DE INFORMAÇÕES DIGITAIS
-void to_lowercase(char *str) {
-    for (int i = 0; str[i]; i++) {
-        str[i] = (char)tolower((unsigned char)str[i]);
-    }
+
+// --- CONVERSOR DE INFORMAÇÕES DIGITAIS --
+
+// Função para converter a unidade para minuscula
+void exibirMenuInfDigital() {
+    printf("\n=====================================\n");
+    printf("  CONVERSOR DE INFORMACOES DIGITAIS\n");
+    printf("          (Prefixo do S.I.)\n");
+    printf("=====================================\n");
+    printf("Escolha a unidade de entrada:\n");
+    printf(" [1] Bits (b)\n");
+    printf(" [2] Bytes (B)\n");
+    printf(" [3] Kilobytes (kB)\n");
+    printf(" [4] Megabytes (MB)\n");
+    printf(" [5] Gigabytes (GB)\n");
+    printf(" [6] Terabytes (TB)\n");
+    printf("\n>>> Digite o numero correspondente a unidade de entrada: ");
 }
 
-void converterInfDigital(){
+// Função para converter informações digitais
+void converterInfDigital() {
+    int unidadeOrigem;
     double valor;
-    char unidade[10], continuar = 's';
-    
-    //constante para a conversão
+    char opcao = 's';
+
     const double BITS_POR_BYTE = 8.0;
-    const double BYTES_POR_KILOBYTE = 1024.0;
-    const double BYTES_POR_MEGABYTE = 1024.0 * 1024.0;
-    const double BYTES_POR_GIGABYTE = 1024.0 * 1024.0 * 1024.0;
-    const double BYTES_POR_TERABYTE = 1024.0 * 1024.0 * 1024.0 * 1024.0;
-
-    while(continuar == 's' || continuar == 'S'){
-        printf("\n======Conversor de Informacoes Digitais======\n");
-
-        printf("Digite o valor: ");
-        if(scanf("%lf%*c", &valor) != 1){
-            printf("Valor inválido!\n");
-           continue;
+    const double BYTES_POR_KILOBYTE = 1000.0;
+    const double BYTES_POR_MEGABYTE = 1000.0 * 1000.0;
+    const double BYTES_POR_GIGABYTE = 1000.0 * 1000.0 * 1000.0;
+    const double BYTES_POR_TERABYTE = 1000.0 * 1000.0 * 1000.0 * 1000.0;
+    do{
+        exibirMenuInfDigital();
+        if(scanf("%d%*c", &unidadeOrigem) != 1 || unidadeOrigem < 1 || unidadeOrigem > 6) {
+            printf("Unidade invalida! Por favor, tente novamente.\n");
+            continue;
         }
-
-        printf("Digite a unidade(bits, bytes, KB, MB, GB, TB): ");
-
-        if(scanf("%9s%*c", unidade) != 1){
-            printf("Unidade inválida!\n");
+       
+        printf(">>> Digite o valor a ser convertido: ");
+        if(scanf("%lf%*c", &valor) != 1 || valor < 0) {
+            printf("Valor invalido! Por favor, tente novamente.\n");
             continue;
         }
 
-        //converter unidade para minuscula para facilitar a comparação
-        to_lowercase(unidade);
-
-        // Converte o valor para bytes
         double valor_em_bytes;
-        if (strcmp(unidade, "bits") == 0 || strcmp(unidade, "bit") == 0) {
-            valor_em_bytes = valor / BITS_POR_BYTE;
-        } else if (strcmp(unidade, "bytes") == 0 || strcmp(unidade, "byte") == 0) {
-            valor_em_bytes = valor;
-        } else if (strcmp(unidade, "kb") == 0 || strcmp(unidade, "kilobytes") == 0) {
-            valor_em_bytes = valor * BYTES_POR_KILOBYTE;
-        } else if (strcmp(unidade, "mb") == 0 || strcmp(unidade, "megabytes") == 0) {
-            valor_em_bytes = valor * BYTES_POR_MEGABYTE;
-        } else if (strcmp(unidade, "gb") == 0 || strcmp(unidade, "gigabytes") == 0) {
-            valor_em_bytes = valor * BYTES_POR_GIGABYTE;
-        } else if (strcmp(unidade, "tb") == 0 || strcmp(unidade, "terabytes") == 0) {
-            valor_em_bytes = valor * BYTES_POR_TERABYTE;
-        } else {
-            printf("Unidade inválida!\n");
-            return;
+
+        switch (unidadeOrigem) {
+            case 1: // Bits
+                valor_em_bytes = valor / BITS_POR_BYTE;
+                break;
+            case 2: // Bytes
+                valor_em_bytes = valor;
+                break;
+            case 3: // KB
+                valor_em_bytes = valor * BYTES_POR_KILOBYTE;
+                break;
+            case 4: // MB
+                valor_em_bytes = valor * BYTES_POR_MEGABYTE;
+                break;
+            case 5: // GB
+                valor_em_bytes = valor * BYTES_POR_GIGABYTE;
+                break;
+            case 6: // TB
+                valor_em_bytes = valor * BYTES_POR_TERABYTE;
+                break;
         }
-        // Converte o valor em bytes para outras unidades
-        double em_bits = valor_em_bytes * BITS_POR_BYTE;
+        // Converte para bits(arredonda para o inteiro mais proximo)
+        long long em_bits = (long long) (valor_em_bytes * BITS_POR_BYTE + 0.5);
+
+        // Converte de bytes para as demais unidades(decimal) 
         double em_kb = valor_em_bytes / BYTES_POR_KILOBYTE;
         double em_mb = valor_em_bytes / BYTES_POR_MEGABYTE;
         double em_gb = valor_em_bytes / BYTES_POR_GIGABYTE;
         double em_tb = valor_em_bytes / BYTES_POR_TERABYTE;
 
-        printf("\n======Resultados======\n");
-        printf("Bits: %.2f\n", em_bits);
-        printf("Bytes: %.2f\n", valor_em_bytes);
-        printf("Kilobytes: %.2f\n", em_kb);
-        printf("Megabytes: %.2f\n", em_mb);
-        printf("Gigabytes: %.2f\n", em_gb);
-        printf("Terabytes: %.2f\n", em_tb);
-        
-        printf("\nDeseja outra conversao? (s/n): ");
-        scanf("%c%*c", &continuar);
-    }
+        printf("\n--------------------------------------\n");
+        printf("Resultados (base 10)\n");
+        printf("--------------------------------------\n");
+        printf("%-12s : %lld b\n", "Bits", em_bits);
+        printf("%-12s : %.2f B\n", "Bytes", valor_em_bytes);
+        printf("%-12s : %.2f kB\n", "Kilobytes", em_kb);
+        printf("%-12s : %.2f MB\n", "Megabytes", em_mb);
+        printf("%-12s : %.2f GB\n", "Gigabytes", em_gb);
+        printf("%-12s : %.2f TB\n", "Terabytes", em_tb);
+
+        printf("\n>>> Deseja realizar outra conversao de informacoes digitais? (s/n): ");
+        scanf(" %c%*c", &opcao);
+    }while(opcao == 's'|| opcao == 'S');
+}
+
+// Função para exibir o menu principal
+void exibirMenu() {
+    printf("\nEscolha o tipo de conversão:\n");
+    printf("1 - Conversor de Massa\n");
+    printf("2 - Conversor de Comprimento\n");
+    printf("8 - Conversor de Informacoes Digitais\n");
+    printf("Digite sua escolha: ");
 }
 
 int main() {
-    converterInfDigital();
+    int tipoConversao, unidadeOrigem;
+    double valor;
+    char opcao = 's';
+
+    do{
+        // Exibe o menu principal
+        exibirMenu();
+        scanf("%d", &tipoConversao);
+
+        switch (tipoConversao) {
+        case 1: // Conversão de massa
+            printf("\nConversor de Unidades de Massa\n");
+            exibirMenuMassa();
+            scanf("%d", &unidadeOrigem);
+            printf("Digite o valor a ser convertido: ");
+            scanf("%lf", &valor);
+            converterUnidadeMassa(unidadeOrigem, valor);
+            break;
+
+        case 2: // Conversão de comprimento
+            printf("\nConversor de Unidades de Comprimento\n");
+            exibirMenuComprimento();
+            scanf("%d", &unidadeOrigem);
+            printf("Digite o valor a ser convertido: ");
+            scanf("%lf", &valor);
+            converterUnidadeComprimento(unidadeOrigem, valor);
+            break;
+        case 8: // Conversão de Informações Digitais
+            converterInfDigital();
+            break;
+
+        default: // Opção inválida
+            printf("\nOpção inválida! Por favor, tente novamente.\n");
+            break;
+        }
+
+        printf("\n>>> Deseja voltar ao menu principal? (s/n): ");
+        scanf(" %c%*c", &opcao);
+    }while(opcao == 's' || opcao == 'S');
 
     return 0;
 }
