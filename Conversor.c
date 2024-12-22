@@ -1,5 +1,6 @@
 #include <stdio.h>
 
+// Função para exibir o menu de conversão de massa
 void exibirMenuMassa() {
     printf("\nEscolha a unidade de entrada:\n");
     printf("1 - Quilograma (kg)\n");
@@ -8,6 +9,7 @@ void exibirMenuMassa() {
     printf("Digite sua escolha: ");
 }
 
+// Função para converter unidades de massa
 void converterUnidadeMassa(int unidadeOrigem, double valor) {
     double quilogramas, gramas, toneladas;
 
@@ -34,7 +36,8 @@ void converterUnidadeMassa(int unidadeOrigem, double valor) {
     printf("Toneladas: %.6f t\n", toneladas);
 }
 
-void exibirMenuMetro() {
+// Função para exibir o menu de conversão de comprimento
+void exibirMenuComprimento() {
     printf("\nEscolha a unidade de entrada:\n");
     printf("1 - Metro (m)\n");
     printf("2 - Centímetro (cm)\n");
@@ -42,7 +45,8 @@ void exibirMenuMetro() {
     printf("Digite sua escolha: ");
 }
 
-void converterUnidade(int unidadeOrigem, double valor) {
+// Função para converter unidades de comprimento
+void converterUnidadeComprimento(int unidadeOrigem, double valor) {
     double metros, centimetros, milimetros;
 
     // Conversão para metros
@@ -68,20 +72,45 @@ void converterUnidade(int unidadeOrigem, double valor) {
     printf("Milímetros: %.2f mm\n", milimetros);
 }
 
+// Função para exibir o menu principal
+void exibirMenu() {
+    printf("\nEscolha o tipo de conversão:\n");
+    printf("1 - Conversor de Massa\n");
+    printf("2 - Conversor de Comprimento\n");
+    printf("Digite sua escolha: ");
+}
+
 int main() {
-    int unidadeOrigem, tipoConversao;
+    int tipoConversao, unidadeOrigem;
     double valor;
 
-    printf("Conversor de Unidades de Comprimento\n");
-    printf("Qual conversor deseja trabalhar? ");
-    
-    exibirMenuMetro();
-    scanf("%d", &unidadeOrigem);
+    // Exibe o menu principal
+    exibirMenu();
+    scanf("%d", &tipoConversao);
 
-    printf("Digite o valor a ser convertido: ");
-    scanf("%lf", &valor);
+    switch (tipoConversao) {
+    case 1: // Conversão de massa
+        printf("\nConversor de Unidades de Massa\n");
+        exibirMenuMassa();
+        scanf("%d", &unidadeOrigem);
+        printf("Digite o valor a ser convertido: ");
+        scanf("%lf", &valor);
+        converterUnidadeMassa(unidadeOrigem, valor);
+        break;
 
-    converterUnidade(unidadeOrigem, valor);
+    case 2: // Conversão de comprimento
+        printf("\nConversor de Unidades de Comprimento\n");
+        exibirMenuComprimento();
+        scanf("%d", &unidadeOrigem);
+        printf("Digite o valor a ser convertido: ");
+        scanf("%lf", &valor);
+        converterUnidadeComprimento(unidadeOrigem, valor);
+        break;
+
+    default: // Opção inválida
+        printf("\nOpção inválida! Por favor, tente novamente.\n");
+        break;
+    }
 
     return 0;
 }
