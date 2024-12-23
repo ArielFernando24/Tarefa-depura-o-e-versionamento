@@ -174,41 +174,36 @@ int main() {
     double valor;
     char opcao = 's';
 
-    do{
-        // Exibe o menu principal
-        exibirMenu();
-        scanf("%d", &tipoConversao);
+    // Exibe o menu principal
+    exibirMenu();
+    scanf("%d", &tipoConversao);
 
-        switch (tipoConversao) {
-        case 1: // Conversão de massa
-            printf("\nConversor de Unidades de Massa\n");
-            exibirMenuMassa();
-            scanf("%d", &unidadeOrigem);
-            printf("Digite o valor a ser convertido: ");
-            scanf("%lf", &valor);
-            converterUnidadeMassa(unidadeOrigem, valor);
-            break;
+    switch (tipoConversao) {
+    case 1: // Conversão de massa
+        printf("\nConversor de Unidades de Massa\n");
+        exibirMenuMassa();
+        scanf("%d", &unidadeOrigem);
+        printf("Digite o valor a ser convertido: ");
+        scanf("%lf", &valor);
+        converterUnidadeMassa(unidadeOrigem, valor);
+        break;
 
-        case 2: // Conversão de comprimento
-            printf("\nConversor de Unidades de Comprimento\n");
-            exibirMenuComprimento();
-            scanf("%d", &unidadeOrigem);
-            printf("Digite o valor a ser convertido: ");
-            scanf("%lf", &valor);
-            converterUnidadeComprimento(unidadeOrigem, valor);
-            break;
-        case 8: // Conversão de Informações Digitais
-            converterInfDigital();
-            break;
+    case 2: // Conversão de comprimento
+        printf("\nConversor de Unidades de Comprimento\n");
+        exibirMenuComprimento();
+        scanf("%d", &unidadeOrigem);
+        printf("Digite o valor a ser convertido: ");
+        scanf("%lf", &valor);
+        converterUnidadeComprimento(unidadeOrigem, valor);
+        break;
+    case 8: // Conversão de informações digitais
+        converterInfDigital();
+        break;
 
-        default: // Opção inválida
-            printf("\nOpção inválida! Por favor, tente novamente.\n");
-            break;
-        }
-
-        printf("\n>>> Deseja voltar ao menu principal? (s/n): ");
-        scanf(" %c%*c", &opcao);
-    }while(opcao == 's' || opcao == 'S');
+    default: // Opção inválida
+        printf("\nOpção inválida! Por favor, tente novamente.\n");
+        break;
+    }
 
     return 0;
 }
