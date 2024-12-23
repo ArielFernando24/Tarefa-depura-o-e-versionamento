@@ -1,6 +1,4 @@
 #include <stdio.h>
-#include <string.h>
-#include <ctype.h>
 
 // Função para exibir o menu de conversão de massa
 void exibirMenuMassa() {
@@ -73,7 +71,6 @@ void converterUnidadeComprimento(int unidadeOrigem, double valor) {
     printf("Centímetros: %.2f cm\n", centimetros);
     printf("Milímetros: %.2f mm\n", milimetros);
 }
-
 
 // --- CONVERSOR DE INFORMAÇÕES DIGITAIS --
 
