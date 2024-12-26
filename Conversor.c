@@ -365,7 +365,7 @@ void exibirMenu() {
     printf("3 - Conversor de Informações Digitais\n");
     printf("4 - Conversor de Grandezas Elétricas\n");
     printf("5 - Conversor de Temperatura\n");
-    printf("5 - Conversor de velocidade\n");
+    printf("6 - Conversor de velocidade\n");
     printf("* - Desenvolvedores\n");
     printf("Digite sua escolha: ");
 }
@@ -403,7 +403,7 @@ int main() {
             case '5':
                 converterTemperatura();
                 break;
-              case '5':
+              case '6':
                 converterVelocidade();
                 break;
             case '*':
