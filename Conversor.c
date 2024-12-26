@@ -605,82 +605,6 @@ void converterTempo()
         scanf(" %c%*c", &opcao);
     } while (opcao == 's' || opcao == 'S');
 }
-void exibirMenuArea()
-{
-    printf("\n====================================="
-           "\n      CONVERSOR DE UNIDADES DE ÁREA\n"
-           "====================================="
-           "\nEscolha a unidade de entrada:\n");
-    printf(" [1] Metros Quadrados (m²)\n");
-    printf(" [2] Centímetros Quadrados (cm²)\n");
-    printf(" [3] Hectares (ha)\n");
-    printf(" [4] Acres (ac)\n");
-    printf("\n>>> Digite sua escolha: ");
-}
-
-void converterUnidadeArea()
-{
-    int unidadeOrigem;
-    double valor;
-    char opcao = 's';
-    do
-    {
-        limparTela();
-        exibirMenuArea();
-        if (scanf("%d", &unidadeOrigem) != 1 || unidadeOrigem < 1 || unidadeOrigem > 4)
-        {
-            printf("Unidade inválida! Por favor, tente novamente.\n");
-            while (getchar() != '\n')
-                ; // Limpa buffer
-            continue;
-        }
-
-        printf("\nDigite o valor a ser convertido: ");
-        if (scanf("%lf", &valor) != 1 || valor < 0)
-        {
-            printf("Valor inválido! Por favor, tente novamente.\n");
-            while (getchar() != '\n')
-                ; // Limpa buffer
-            continue;
-        }
-
-        double metrosQuadrados;
-
-        // Conversão para metros quadrados como unidade base
-        switch (unidadeOrigem)
-        {
-        case 1:
-            metrosQuadrados = valor;
-            break;
-        case 2:
-            metrosQuadrados = valor / 10000.0;
-            break;
-        case 3:
-            metrosQuadrados = valor * 10000.0;
-            break;
-        case 4:
-            metrosQuadrados = valor * 4046.85642;
-            break;
-        default:
-            printf("Erro inesperado.\n");
-            return;
-        }
-
-        // Conversões para outras unidades
-        double centimetrosQuadrados = metrosQuadrados * 10000.0;
-        double hectares = metrosQuadrados / 10000.0;
-        double acres = metrosQuadrados / 4046.85642;
-
-        printf("\nResultados:\n");
-        printf("Metros Quadrados: %.4f m²\n", metrosQuadrados);
-        printf("Centímetros Quadrados: %.2f cm²\n", centimetrosQuadrados);
-        printf("Hectares: %.6f ha\n", hectares);
-        printf("Acres: %.6f ac\n", acres);
-
-        printf("\n>>> Deseja realizar outra conversão de área? (s/n): ");
-        scanf(" %c%*c", &opcao);
-    } while (opcao == 's' || opcao == 'S');
-}
 
 void desenvolvedores()
 {
@@ -706,7 +630,6 @@ void exibirMenu()
     printf("6 - Conversor de velocidade\n");
     printf("7 - Conversor de Volume\n");
     printf("8 - Conversor de Tempo\n");
-    printf("9 - Conversor de Área\n");
     printf("* - Desenvolvedores\n");
     printf("Digite sua escolha: ");
 }
@@ -757,9 +680,6 @@ int main()
             break;
         case '8':
             converterTempo();
-            break;
-        case '9':
-            converterUnidadeArea();
             break;
         case '*':
             limparTela();
