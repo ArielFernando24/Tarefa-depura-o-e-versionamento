@@ -230,6 +230,104 @@ void converterEletrico() {
     } while (opcao == 's' || opcao == 'S');
 }
 
+void exibirMenuTemperatura() {
+    printf("\n====================================="
+           "\n      CONVERSOR DE UNIDADES DE TEMPERATURA\n"
+           "====================================="
+           "\nEscolha a unidade de entrada:\n");
+    printf(" [1] Celsius (°C)\n");
+    printf(" [2] Fahrenheit (°F)\n");
+    printf(" [3] Kelvin (K)\n");
+    printf(" [4] Rankine (°R)\n");
+    printf(" [5] Réaumur (°Re)\n");
+    printf("\n>>> Digite sua escolha: ");
+}
+
+void exibirResultadosTemperatura(double valor, int unidadeOrigem) {
+    double celsius, fahrenheit, kelvin, rankine, reaumur;
+
+    
+    switch (unidadeOrigem) {
+        case 1: 
+            celsius = valor;
+            fahrenheit = (celsius * 9.0 / 5.0) + 32.0;
+            kelvin = celsius + 273.15;
+            rankine = (celsius + 273.15) * 9.0 / 5.0;
+            reaumur = celsius * 0.8;
+            break;
+        case 2: 
+            fahrenheit = valor;
+            celsius = (fahrenheit - 32.0) * 5.0 / 9.0;
+            kelvin = celsius + 273.15;
+            rankine = fahrenheit + 459.67;
+            reaumur = celsius * 0.8;
+            break;
+        case 3: 
+            kelvin = valor;
+            celsius = kelvin - 273.15;
+            fahrenheit = (celsius * 9.0 / 5.0) + 32.0;
+            rankine = kelvin * 9.0 / 5.0;
+            reaumur = celsius * 0.8;
+            break;
+        case 4: 
+            rankine = valor;
+            kelvin = rankine * 5.0 / 9.0;
+            celsius = kelvin - 273.15;
+            fahrenheit = rankine - 459.67;
+            reaumur = celsius * 0.8;
+            break;
+        case 5: 
+            reaumur = valor;
+            celsius = reaumur * 1.25;
+            fahrenheit = (celsius * 9.0 / 5.0) + 32.0;
+            kelvin = celsius + 273.15;
+            rankine = (celsius + 273.15) * 9.0 / 5.0;
+            break;
+        default:
+            printf("Erro: Unidade inválida!\n");
+            return;
+    }
+
+    
+    printf("\n=====================================\n");
+    printf("Resultados da Conversão de Temperatura:\n");
+    printf("=====================================\n");
+    printf("Celsius (°C): %.2f\n", celsius);
+    printf("Fahrenheit (°F): %.2f\n", fahrenheit);
+    printf("Kelvin (K): %.2f\n", kelvin);
+    printf("Rankine (°R): %.2f\n", rankine);
+    printf("Réaumur (°Re): %.2f\n", reaumur);
+    printf("=====================================\n");
+}
+
+void converterTemperatura() {
+    int unidadeOrigem;
+    double valor;
+    char opcao = 's';
+
+    do {
+        limparTela();
+        exibirMenuTemperatura();
+        if (scanf("%d%*c", &unidadeOrigem) != 1 || unidadeOrigem < 1 || unidadeOrigem > 5) {
+            printf("Opção inválida! Por favor, tente novamente.\n");
+            while (getchar() != '\n'); 
+            continue;
+        }
+
+        printf("\n>>> Digite o valor a ser convertido: ");
+        if (scanf("%lf", &valor) != 1) {
+            printf("Valor inválido! Por favor, tente novamente.\n");
+            while (getchar() != '\n'); 
+            continue;
+        }
+
+        exibirResultadosTemperatura(valor, unidadeOrigem);
+
+        printf("\n>>> Deseja realizar outra conversão de temperatura? (s/n): ");
+        scanf(" %c%*c", &opcao);
+    } while (opcao == 's' || opcao == 'S');
+}
+
 void desenvolvedores() {
     printf("\n=== DESENVOLVEDORES ===\n");
     printf("1 - Hércules Santos\n");
@@ -248,6 +346,7 @@ void exibirMenu() {
     printf("2 - Conversor de Comprimento\n");
     printf("3 - Conversor de Informações Digitais\n");
     printf("4 - Conversor de Grandezas Elétricas\n");
+    printf("5 - Conversor de Temperatura\n");
     printf("* - Desenvolvedores\n");
     printf("Digite sua escolha: ");
 }
@@ -282,6 +381,9 @@ int main() {
             case '4':
                 converterEletrico();
                 break;
+            case '5':
+                converterTemperatura();
+                break;
             case '*':
                 limparTela();
                 desenvolvedores();
@@ -291,6 +393,7 @@ int main() {
                 printf("\nOpção inválida! Por favor, tente novamente.\n");
                 break;
         }
+
 
         printf("\n>>> Deseja voltar ao menu principal? (s/n): ");
         scanf(" %c%*c", &opcao);
