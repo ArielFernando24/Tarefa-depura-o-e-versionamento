@@ -230,6 +230,24 @@ void converterEletrico() {
     } while (opcao == 's' || opcao == 'S');
 }
 
+void converterVelocidade() {
+    double valor;
+    printf("Informe qual valor voce quer converte ?\n");
+    scanf("%lf", &valor);
+
+    // Conversão para todas as unidades
+    double em_ms = valor / 3.6;       // km/h -> m/s
+    double em_kmh = valor;           // km/h permanece o mesmo
+    double em_mph = valor / 1.60934; // km/h -> mph
+
+    // Exibe os resultados
+    printf("Velocidade convertida:\n");
+    printf("- %.2lf km/h\n", em_kmh);
+    printf("- %.2lf m/s\n", em_ms);
+    printf("- %.2lf mph\n", em_mph);
+
+}
+
 void desenvolvedores() {
     printf("\n=== DESENVOLVEDORES ===\n");
     printf("1 - Hércules Santos\n");
@@ -248,6 +266,7 @@ void exibirMenu() {
     printf("2 - Conversor de Comprimento\n");
     printf("3 - Conversor de Informações Digitais\n");
     printf("4 - Conversor de Grandezas Elétricas\n");
+    printf("5 - Conversor de velocidade\n");
     printf("* - Desenvolvedores\n");
     printf("Digite sua escolha: ");
 }
@@ -281,6 +300,9 @@ int main() {
                 break;
             case '4':
                 converterEletrico();
+                break;
+              case '5':
+                converterVelocidade();
                 break;
             case '*':
                 limparTela();
