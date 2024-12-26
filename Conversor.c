@@ -346,6 +346,56 @@ void converterVelocidade() {
 
 }
 
+void exibirMenuVolume() {
+    printf("\nEscolha a unidade de origem:\n");
+    printf("1 - Litros\n");
+    printf("2 - Mililitros\n");
+    printf("3 - Metros cúbicos\n");
+    printf("Digite sua escolha: ");
+}
+
+void converterUnidadeVolume() {
+    int unidadeOrigem;
+    double valor;
+    char opcao = 's';
+    do {
+        limparTela();
+        exibirMenuVolume();
+        if (scanf("%d", &unidadeOrigem) != 1 || unidadeOrigem < 1 || unidadeOrigem > 3) {
+            printf("Unidade inválida! Por favor, tente novamente.\n");
+            while (getchar() != '\n'); // Limpa buffer
+            continue;
+        }
+
+        printf("Digite o valor a ser convertido: ");
+        if (scanf("%lf", &valor) != 1 || valor < 0) {
+            printf("Valor inválido! Por favor, tente novamente.\n");
+            while (getchar() != '\n'); // Limpa buffer
+            continue;
+        }
+
+        double litros, mililitros, metrosCubicos;
+        if (unidadeOrigem == 1) {
+            litros = valor;
+        } else if (unidadeOrigem == 2) {
+            litros = valor / 1000.0;
+        } else if (unidadeOrigem == 3) {
+            litros = valor * 1000.0;
+        }
+
+        mililitros = litros * 1000.0;
+        metrosCubicos = litros / 1000.0;
+
+        printf("\nResultados:\n");
+        printf("Litros: %.4f L\n", litros);
+        printf("Mililitros: %.2f mL\n", mililitros);
+        printf("Metros cúbicos: %.6f m³\n", metrosCubicos);
+
+        printf("\n>>> Deseja realizar outra conversão de volume? (s/n): ");
+        scanf(" %c%*c", &opcao);
+    } while (opcao == 's' || opcao == 'S');
+}
+
 void desenvolvedores() {
     printf("\n=== DESENVOLVEDORES ===\n");
     printf("1 - Hércules Santos\n");
@@ -366,6 +416,7 @@ void exibirMenu() {
     printf("4 - Conversor de Grandezas Elétricas\n");
     printf("5 - Conversor de Temperatura\n");
     printf("6 - Conversor de velocidade\n");
+    printf("7 - Conversor de Volume\n");
     printf("* - Desenvolvedores\n");
     printf("Digite sua escolha: ");
 }
@@ -403,8 +454,11 @@ int main() {
             case '5':
                 converterTemperatura();
                 break;
-              case '6':
+            case '6':
                 converterVelocidade();
+                break;
+            case '7':
+                converterUnidadeVolume();
                 break;
             case '*':
                 limparTela();
