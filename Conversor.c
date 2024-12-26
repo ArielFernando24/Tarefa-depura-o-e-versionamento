@@ -608,14 +608,19 @@ void converterTempo()
 void exibirMenuArea()
 {
     printf("\n====================================="
-           "\n      CONVERSOR DE UNIDADES DE ÁREA\n"
+           "\n     CONVERSOR DE UNIDADES DE ÁREA\n"
            "====================================="
            "\nEscolha a unidade de entrada:\n");
-    printf(" [1] Metros Quadrados (m²)\n");
-    printf(" [2] Centímetros Quadrados (cm²)\n");
-    printf(" [3] Hectares (ha)\n");
-    printf(" [4] Acres (ac)\n");
-    printf("\n>>> Digite sua escolha: ");
+    printf("1 - Centímetros quadrados (cm²)\n");
+    printf("2 - Metros quadrados (m²)\n");
+    printf("3 - Quilômetros quadrados (km²)\n");
+    printf("4 - Hectares (ha)\n");
+    printf("5 - Acres (ac)\n");
+    printf("6 - Alqueires\n");
+    printf("7 - Polegadas quadradas (in²)\n");
+    printf("8 - Pés quadrados (ft²)\n");
+    printf("9 - Milhas quadradas (mi²)\n");
+    printf("\nDigite sua escolha: ");
 }
 
 void converterUnidadeArea()
@@ -623,11 +628,20 @@ void converterUnidadeArea()
     int unidadeOrigem;
     double valor;
     char opcao = 's';
+    const double CM2_POR_M2 = 10000.0;
+    const double M2_POR_KM2 = 1000000.0;
+    const double M2_POR_HA = 10000.0;
+    const double M2_POR_AC = 4046.85642;
+    const double M2_POR_ALQ = 24200.0;
+    const double M2_POR_IN2 = 0.00064516;
+    const double M2_POR_FT2 = 0.09290304;
+    const double M2_POR_MI2 = 2589988.11;
+
     do
     {
         limparTela();
         exibirMenuArea();
-        if (scanf("%d", &unidadeOrigem) != 1 || unidadeOrigem < 1 || unidadeOrigem > 4)
+        if (scanf("%d", &unidadeOrigem) != 1 || unidadeOrigem < 1 || unidadeOrigem > 9)
         {
             printf("Unidade inválida! Por favor, tente novamente.\n");
             while (getchar() != '\n')
@@ -635,7 +649,7 @@ void converterUnidadeArea()
             continue;
         }
 
-        printf("\nDigite o valor a ser convertido: ");
+        printf("Digite o valor a ser convertido: ");
         if (scanf("%lf", &valor) != 1 || valor < 0)
         {
             printf("Valor inválido! Por favor, tente novamente.\n");
@@ -645,37 +659,47 @@ void converterUnidadeArea()
         }
 
         double metrosQuadrados;
-
-        // Conversão para metros quadrados como unidade base
         switch (unidadeOrigem)
         {
         case 1:
-            metrosQuadrados = valor;
+            metrosQuadrados = valor / CM2_POR_M2;
             break;
         case 2:
-            metrosQuadrados = valor / 10000.0;
+            metrosQuadrados = valor;
             break;
         case 3:
-            metrosQuadrados = valor * 10000.0;
+            metrosQuadrados = valor * M2_POR_KM2;
             break;
         case 4:
-            metrosQuadrados = valor * 4046.85642;
+            metrosQuadrados = valor * M2_POR_HA;
             break;
-        default:
-            printf("Erro inesperado.\n");
-            return;
+        case 5:
+            metrosQuadrados = valor * M2_POR_AC;
+            break;
+        case 6:
+            metrosQuadrados = valor * M2_POR_ALQ;
+            break;
+        case 7:
+            metrosQuadrados = valor * M2_POR_IN2;
+            break;
+        case 8:
+            metrosQuadrados = valor * M2_POR_FT2;
+            break;
+        case 9:
+            metrosQuadrados = valor * M2_POR_MI2;
+            break;
         }
 
-        // Conversões para outras unidades
-        double centimetrosQuadrados = metrosQuadrados * 10000.0;
-        double hectares = metrosQuadrados / 10000.0;
-        double acres = metrosQuadrados / 4046.85642;
-
         printf("\nResultados:\n");
-        printf("Metros Quadrados: %.4f m²\n", metrosQuadrados);
-        printf("Centímetros Quadrados: %.2f cm²\n", centimetrosQuadrados);
-        printf("Hectares: %.6f ha\n", hectares);
-        printf("Acres: %.6f ac\n", acres);
+        printf("Centímetros quadrados: %.2f cm²\n", metrosQuadrados * CM2_POR_M2);
+        printf("Metros quadrados: %.4f m²\n", metrosQuadrados);
+        printf("Quilômetros quadrados: %.8f km²\n", metrosQuadrados / M2_POR_KM2);
+        printf("Hectares: %.6f ha\n", metrosQuadrados / M2_POR_HA);
+        printf("Acres: %.6f ac\n", metrosQuadrados / M2_POR_AC);
+        printf("Alqueires: %.6f\n", metrosQuadrados / M2_POR_ALQ);
+        printf("Polegadas quadradas: %.2f in²\n", metrosQuadrados / M2_POR_IN2);
+        printf("Pés quadrados: %.2f ft²\n", metrosQuadrados / M2_POR_FT2);
+        printf("Milhas quadradas: %.8f mi²\n", metrosQuadrados / M2_POR_MI2);
 
         printf("\n>>> Deseja realizar outra conversão de área? (s/n): ");
         scanf(" %c%*c", &opcao);
@@ -686,7 +710,7 @@ void desenvolvedores()
 {
     printf("\n=== DESENVOLVEDORES ===\n");
     printf("1 - Hércules Santos\n");
-    printf("2 - Danilo Lacerda\n");
+    printf("2 - Danilo P. Lacerda\n");
     printf("3 - Ariel Fernando\n");
     printf("4 - Cíntia Conceição\n");
     printf("5 - Julio Junior\n");
