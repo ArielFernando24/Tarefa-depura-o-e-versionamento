@@ -710,7 +710,7 @@ void desenvolvedores()
 {
     printf("\n=== DESENVOLVEDORES ===\n");
     printf("1 - Hércules Santos\n");
-    printf("2 - Danilo Lacerda\n");
+    printf("2 - Danilo P. Lacerda\n");
     printf("3 - Ariel Fernando\n");
     printf("4 - Cíntia Conceição\n");
     printf("5 - Julio Junior\n");
