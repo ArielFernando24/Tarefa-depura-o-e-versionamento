@@ -1,6 +1,6 @@
 # Tarefa sobre depuramento e versionamento
 
-Foi realizado os seguintes passos na realização da tarefa, sendo eles:
+Foi realizado os seguintes passos na realização da atividade proposta, sendo eles:
 
 1. Unidades de comprimento (metro, centímetro, milímetro)
 2. Unidades de massa (quilograma, grama, tonelada)
@@ -12,4 +12,4 @@ Foi realizado os seguintes passos na realização da tarefa, sendo eles:
 8. Unidades de tempo (segundos, minutos, horas)
 9. Bits, bytes, kilobytes (KB), megabytes (MB), gigabytes (GB), terabytes (TB)
 10. Interface de usuário
-11. Testes e depuração
+11. Testes e depuração.
